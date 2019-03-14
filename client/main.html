@@ -4,8 +4,10 @@
 
 <body>
 	<div class="container">
-		{{> navBar}}
-		{{> mainBody}}
+		{{> navBar}}		
+		{{> addBook}}			
+		{{> Book}}
+		{{> viewBook}}
 		{{> footerBar}}
 	</div>
 </body>
@@ -55,62 +57,186 @@
 	</section>
 </template>
 
-<template name="mainBody">
+
+<!-- adding books -->
+<template name="addBook">
+  <div class="row justify-content-around">
+  <div class="col-6">
+   <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#picture">
+  Add Book
+    </button> 
+  </div> 
+  </div>
+
+<div class="modal fade" id="picture" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Add Book</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+     <div class="input-group mb-3">
+  <div class="input-group-prepend">
+    <span class="input-group-text" id="basic-addon1">Image</span>
+  </div>
+  <input type="text" name="image" class="form-control" placeholder="url" aria-label="url" aria-describedby="basic-addon1">
+</div>
+
+        <div class="input-group mb-3">
+  <div class="input-group-prepend">
+    <span class="input-group-text" id="basic-addon1">Title</span>
+  </div>
+  <input type="text" name="title" class="form-control" placeholder="Title" aria-label="title" aria-describedby="basic-addon1">
+</div>
+
+     <div class="input-group mb-3">
+  <div class="input-group-prepend">
+    <span class="input-group-text" id="basic-addon1">Author</span>
+  </div>
+  <input type="text" name="author" class="form-control" placeholder="Author" aria-label="author" aria-describedby="basic-addon1">
+</div>
+
+     <div class="input-group mb-3">
+  <div class="input-group-prepend">
+    <span class="input-group-text" id="basic-addon1">Description</span>
+  </div>
+  <input type="text" name="description" class="form-control" placeholder="description" aria-label="description" aria-describedby="basic-addon1" rows="3">
+</div>
+
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+        <button type="button" class="btn btn-primary js-saveBook">Save changes</button>
+      </div>
+    </div>
+  </div>
+</div>
+</template>
+
+
+
+
+
+
+<template name="Book">
 	<main role="main">
 		{{> myJumbo}}
+		<div class="proAll">
+		{{#each proAll}}
+		<div id={{_id}} class="col-4">
 		<div class="album py-5 bg-light">
-			<div class="container">
-				<div class="row">
-					<div class="col-md-4">
+			<div class="container">				
+					
 						<div class="card mb-4 shadow-sm">
-							<img src='data:image/svg+xml;charset=UTF-8,<svg%20width%3D"348"%20height%3D"225"%20xmlns%3D"http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg"%20viewBox%3D"0%200%20348%20225"%20preserveAspectRatio%3D"none"><defs><style%20type%3D"text%2Fcss">%23holder_1697acec537%20text%20%7B%20fill%3A%23eceeef%3Bfont-weight%3Abold%3Bfont-family%3AArial%2C%20Helvetica%2C%20Open%20Sans%2C%20sans-serif%2C%20monospace%3Bfont-size%3A17pt%20%7D%20<%2Fstyle><%2Fdefs><g%20id%3D"holder_1697acec537"><rect%20width%3D"348"%20height%3D"225"%20fill%3D"%2355595c"><%2Frect><g><text%20x%3D"116.7265625"%20y%3D"120.3">Thumbnail<%2Ftext><%2Fg><%2Fg><%2Fsvg>' alt="temp photo">
+							<img src='{{img}}' alt="temp photo">
 							<div class="card-body">
-								<p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
+								<div class="row justify-content-around">
+									<div class="col-sm-5 text-center">
+										<button class="btn btn-primary js-like"><i class="zmdi zmdi-thumb-up zmdi-hc-lg"></i>{{like}}</button>
+						
+					</div>
+					<div class="col-sm-5 text-center">
+						<button class="btn btn-danger  js-like"><i class="zmdi zmdi-thumb-down zmdi-hc-lg"></i></button>{{dislike}}	
+						</div>
+								</div>
+								<div class="row justify-content-around">
+									<div class="col">
+										<p >Title: {{title}}</p>
+									</div>
+								</div>
+								<div class="row justify-content-around">
+									<div class="col">
+										<p >Author: {{author}}</p>
+									</div>
+								</div>
+							
+								<p class="card-text">{{description}}</p>
 								<div class="d-flex justify-content-between align-items-center">
 									<div class="btn-group">
-										<button type="button" class="btn btn-sm btn-outline-secondary">View</button>
+										<button type="button" class="js-Bookedit btn btn-sm btn-outline-secondary">View</button>
 										<button type="button" class="btn btn-sm btn-outline-secondary">Edit</button>
 									</div>
 									<small class="text-muted">9 mins</small>
 								</div>
 							</div>
 						</div>
-					</div> <!-- /col -->
-					<div class="col-md-4">
-						<div class="card mb-4 shadow-sm">
-							<img src='data:image/svg+xml;charset=UTF-8,<svg%20width%3D"348"%20height%3D"225"%20xmlns%3D"http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg"%20viewBox%3D"0%200%20348%20225"%20preserveAspectRatio%3D"none"><defs><style%20type%3D"text%2Fcss">%23holder_1697acec537%20text%20%7B%20fill%3A%23eceeef%3Bfont-weight%3Abold%3Bfont-family%3AArial%2C%20Helvetica%2C%20Open%20Sans%2C%20sans-serif%2C%20monospace%3Bfont-size%3A17pt%20%7D%20<%2Fstyle><%2Fdefs><g%20id%3D"holder_1697acec537"><rect%20width%3D"348"%20height%3D"225"%20fill%3D"%2355595c"><%2Frect><g><text%20x%3D"116.7265625"%20y%3D"120.3">Thumbnail<%2Ftext><%2Fg><%2Fg><%2Fsvg>' alt="temp photo">
-							<div class="card-body">
-								<p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
-								<div class="d-flex justify-content-between align-items-center">
-									<div class="btn-group">
-										<button type="button" class="btn btn-sm btn-outline-secondary">View</button>
-										<button type="button" class="btn btn-sm btn-outline-secondary">Edit</button>
-									</div>
-									<small class="text-muted">9 mins</small>
-								</div>
-							</div>
-						</div>
-					</div> <!-- /col -->
-					<div class="col-md-4">
-						<div class="card mb-4 shadow-sm">
-							<img src='data:image/svg+xml;charset=UTF-8,<svg%20width%3D"348"%20height%3D"225"%20xmlns%3D"http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg"%20viewBox%3D"0%200%20348%20225"%20preserveAspectRatio%3D"none"><defs><style%20type%3D"text%2Fcss">%23holder_1697acec537%20text%20%7B%20fill%3A%23eceeef%3Bfont-weight%3Abold%3Bfont-family%3AArial%2C%20Helvetica%2C%20Open%20Sans%2C%20sans-serif%2C%20monospace%3Bfont-size%3A17pt%20%7D%20<%2Fstyle><%2Fdefs><g%20id%3D"holder_1697acec537"><rect%20width%3D"348"%20height%3D"225"%20fill%3D"%2355595c"><%2Frect><g><text%20x%3D"116.7265625"%20y%3D"120.3">Thumbnail<%2Ftext><%2Fg><%2Fg><%2Fsvg>' alt="temp photo">
-							<div class="card-body">
-								<p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
-								<div class="d-flex justify-content-between align-items-center">
-									<div class="btn-group">
-										<button type="button" class="btn btn-sm btn-outline-secondary">View</button>
-										<button type="button" class="btn btn-sm btn-outline-secondary">Edit</button>
-									</div>
-									<small class="text-muted">9 mins</small>
-								</div>
-							</div>
-						</div>
-					</div> <!-- /col -->
-				</div> <!-- /row for all cards -->
+					 
+				</div>
 			</div>
 		</div>
-
+		{{/each}}
+	</div>		
 	</main>
+</template>
+
+<template name="viewBook">
+  
+    <div class="modal fade" id="edited" tabindex="-1" role="dialog" aria-labelledby="editedLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="editedLabel">{{firstName}} &nbsp; {{lastName}} &nbsp; Profile</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body" id="viewUser">
+        <input id="userId" type="text">
+        <div class="row justify-content-around">
+          <div class="col-4">      
+        <img class="profile" src="{{img}}">      
+          </div> 
+        </div>
+        <div class="row justify-content-around">
+          <div class="col-4">
+            <h1>{{firstName}} &nbsp; {{lastName}}</h1>
+          </div> 
+        </div>
+          <div class="row justify-content-around">
+            <div class="col-4">      
+             <h4>likes {{like}}</h4>
+            </div>
+              <div class="col-4">      
+                <h4>Dislikes {{dislike}}</h4>
+              </div> 
+            </div>
+
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+        <button type="button" class="btn btn-primary">Edit</button>
+      </div>
+    </div>
+  </div>
+</div> 
+
+</template>
+
+<template name="editUser">
+<!-- Modal -->
+<div class="modal fade" id="editUserModal" tabindex="-1" role="dialog" aria-labelledby="editUserModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="editUserModalLabel">Modal title</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body" id="viewUserProfile">
+        <input id="userId" type="hidden">
+        <img class="profPic" src="user-512.png" alt="">
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+        <button type="button" class="btn btn-primary">Save changes</button>
+      </div>
+    </div>
+  </div>
+</div>
 </template>
 
 <template name="footerBar">
