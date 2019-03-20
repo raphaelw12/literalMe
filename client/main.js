@@ -10,46 +10,51 @@ Template.Book.helpers({
 },
 });
 
-Template.profiles.events({
-  'click .js-like'(event, instance) {	
-		var profID = this._id;
-		var numLikes = userDB.findOne({_id:  profID}).like;
-		if (!numLikes) {
-			numLikes = 0;
-		}
-		numLikes = numLikes + 1;	
-		userDB.update({_id:profID}, {$set:{'like': numLikes}});
+Template.Book.events({
+  'click .js-like'(event, instance) {
+    console.log("you click like");
+    var proFID = this._id;
+    var numLikes =userDB.findOne({_id: proFID}).like;
+    if (!numLikes) {
+      numLikes= 0;
+    }
+    numLikes = numLikes + 1;
+    console.log("you have",numLikes);
+    userDB.update({_id:proFID}, {$set:{'like':numLikes}});
   },
   'click .js-dislike'(event, instance){
-		var profID = this._id;
-		var numDisLikes = userDB.findOne({_id:  profID}).dislike;
-		if (!numDisLikes) {
-			numDisLikes = 0;
-		}
-		numDisLikes = numDisLikes + 1;	
-		userDB.update({_id:profID}, {$set:{'dislike': numDisLikes}});
+    console.log("you clicked dislike");
+    var proFID = this._id;
+    var numDLikes =userDB.findOne({_id: proFID}).dislike;
+    if (!numDLikes) {
+      numDLikes= 0;
+    }
+    numDLikes = numDLikes + 1;
+    console.log("you have",numDLikes);
+    userDB.update({_id:proFID}, {$set:{'dislike':numDLikes}});
   },
+
   'click .js-delete'(event, instance){
-  	// console.log(this._id);
-  	var profID = this._id;
-  	$("#" + profID).fadeOut("slow", "swing", function () {
-  		userDB.remove({_id: profID});
-  	});
+    // console.log(this._id);
+    var proFID = this._id;
+    $("#" + proFID).fadeOut("slow","swing",function() {
+      userDB.remove({_id: proFID});
+    });   
   },
-  'click .viewUser'(event, instance){
-  	var uId = this._id;
-  	$('#userId').val(uId);
-  	$('#viewUserBook img').attr('src',userDB.findOne({_id:uId}).img);
-  }
-});
-//  'click .js-Bookedit'(event, instance){
-//   	var uId =this._id;
+//   'click .viewBook'(event, instance){
+//   	var uId = this._id;
 //   	$('#userId').val(uId);
-//   	$('#viewUser img').attr('src',userDB.findOne({_id:uId}).img);
-//   	$("#edited").modal('show');
-//   	console.log("open modal");
+//   	$('#viewUserBook img').attr('src',userDB.findOne({_id:uId}).img);
 //   }
-// }); 	
+// });
+ 'click .js-Bookedit'(event, instance){
+  	var uId =this._id;
+  	$('#userId').val(uId);
+  	$('#viewUser img').attr('src',userDB.findOne({_id:uId}).img);
+  	$("#edited").modal('show');
+  	console.log("open modal");
+  }
+}); 	
 
 Template.addBook.events({
 'click .js-saveBook'(event, instance){  	

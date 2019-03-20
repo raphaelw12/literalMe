@@ -7,7 +7,7 @@
 		{{> navBar}}		
 		{{> addBook}}			
 		{{> Book}}
-		{{> viewBook}}
+		{{> Bookedit}}
 		{{> footerBar}}
 	</div>
 </body>
@@ -135,11 +135,11 @@
 							<div class="card-body">
 								<div class="row justify-content-around">
 									<div class="col-sm-5 text-center">
-										<button class="btn btn-primary js-like"><i class="zmdi zmdi-thumb-up zmdi-hc-lg"></i>{{like}}</button>
+										<button class="btn btn-primary js-like"><i class="zmdi zmdi-thumb-up zmdi-hc-lg"></i>&nbsp;{{like}}</button>
 						
 					</div>
 					<div class="col-sm-5 text-center">
-						<button class="btn btn-danger  js-like"><i class="zmdi zmdi-thumb-down zmdi-hc-lg"></i></button>{{dislike}}	
+						<button class="btn btn-danger  js-dislike"><i class="zmdi zmdi-thumb-down zmdi-hc-lg"></i>&nbsp;{{dislike}}</button>	
 						</div>
 								</div>
 								<div class="row justify-content-around">
@@ -172,13 +172,13 @@
 	</main>
 </template>
 
-<template name="viewBook">
+<template name="Bookedit">
   
     <div class="modal fade" id="edited" tabindex="-1" role="dialog" aria-labelledby="editedLabel" aria-hidden="true">
   <div class="modal-dialog" role="document">
     <div class="modal-content">
       <div class="modal-header">
-        <h5 class="modal-title" id="editedLabel">{{firstName}} &nbsp; {{lastName}} &nbsp; Profile</h5>
+        <h5 class="modal-title" id="editedLabel">Book</h5>
         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
           <span aria-hidden="true">&times;</span>
         </button>
